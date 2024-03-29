@@ -32,7 +32,7 @@ def RQA_Updater():
     data = response.json()
 
     # Getting the version of RCC-C from the JSON object
-    rcc_c_version = data.get("RQA-C", {}).get("Version")
+    rqa_c_version = data.get("RQA-C", {}).get("Version")
 
     local_appdata = os.getenv('LOCALAPPDATA')
     pyc_file_path = os.path.join(local_appdata, 'RQA', 'RQAM.py')
@@ -44,7 +44,7 @@ def RQA_Updater():
 
     debug = False
     # Checking if the version matches
-    if not rcc_c_version == RQA_ver and not debug:
+    if not rqa_c_version == RQA_ver and not debug:
         os.system("cls")
         print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Updating RQA...\n")
         updater_info = data.get("RQA-FS", {}).get("RQAM")
@@ -56,7 +56,7 @@ def RQA_Updater():
             download_file(file_url, destination_path)
             os.system("cls")
             print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> You're up to date!\n")
-            time.sleep(1.5)
+            time.sleep(2)
             RQAM.StartRQA()
     else:
         RQAM.StartRQA()
