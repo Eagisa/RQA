@@ -7,10 +7,10 @@ import os
 import time
 import importlib.util
 
-#RCC_CBS Version
-#=========================#
-RQA_CBS_Ver = "101.0.0.0"
-#=========================#
+#RQA_CBS Version
+#=============================#
+RQA_CBS_Version = "101.0.0.0"
+#=============================#
 
 #=============================================================================#
 RQA_S = "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_S/RQA-S.json"
@@ -40,7 +40,7 @@ def RQA_Updater():
     RQAM = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(RQAM)
 
-    RQA_ver = RQAM.RQC_version
+    RQA_ver = RQAM.RQA_version
 
     debug = False
     # Checking if the version matches
