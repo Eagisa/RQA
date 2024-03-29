@@ -1,13 +1,13 @@
+import colorama
+from colorama import Fore, Back, Style
+colorama.init(autoreset=True)
+import os
+
+
 RQA_version = "1.0.0"
 RQA_RD = "3/30/2024"
 
 def StartRQA():
-    import colorama
-    from colorama import Fore, Back, Style
-    colorama.init(autoreset=True)
-    import os
-
-
     def title():
         print(Fore.LIGHTBLACK_EX+"<+>-------------------<+>",           " ",Fore.LIGHTBLACK_EX+"<+>--------------------------------------------<+>")
         print("   "+Fore.BLACK+Back.CYAN +   " RoQuickAcess v2.0 "," ","      "+Fore.BLACK+Style.NORMAL+Back.GREEN + " UPDATE ",":",Fore.LIGHTYELLOW_EX+"More Feeatures will be added soon")
