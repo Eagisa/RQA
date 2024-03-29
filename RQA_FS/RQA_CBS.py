@@ -9,7 +9,7 @@ import importlib.util
 
 #RQA_CBS Version
 #=============================#
-RQA_CBS_Version = "101.0.0.0"
+RQA_CBS_Version = "101.1.0.0"
 #=============================#
 
 #=============================================================================#
@@ -59,4 +59,5 @@ def RQA_Updater():
             time.sleep(2)
             RQAM.StartRQA()
     else:
+        os.system("cls")
         RQAM.StartRQA()
