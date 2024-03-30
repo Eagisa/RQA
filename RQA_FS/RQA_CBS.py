@@ -40,11 +40,11 @@ def RQA_Updater():
     RQAM = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(RQAM)
 
-    RQA_ver = RQAM.RQA_version
+    RQA_ver =RQAM.RQA_version
 
     debug = False
     # Checking if the version matches
-    if rqa_c_version == RQA_ver and not debug:
+    if rqa_c_version != RQA_ver and not debug:
         os.system("cls")
         print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Updating RQA...\n")
         updater_info = data.get("RQA-FS", {}).get("RQAM")

@@ -75,5 +75,3 @@ def StartRQA():
 
 
     main()
-
-StartRQA()
