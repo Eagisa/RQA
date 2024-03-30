@@ -4,7 +4,7 @@ colorama.init(autoreset=True)
 import os
 
 
-RQA_version = "1.0.4"
+RQA_version = "1.0.5"
 RQA_RD = "3/30/2024"
 
 def StartRQA():
