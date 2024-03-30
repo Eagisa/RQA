@@ -62,5 +62,3 @@ def RQA_Updater():
     else:
         os.system("cls")
         RQAM.StartRQA()
-
-RQA_Updater()
