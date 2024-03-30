@@ -21,15 +21,14 @@ RQA_S = "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_S/RQA-S.json"
 
 def RQA_INTR():
     def RQA_Installer():
-        def check_files_exist(save_directory):
+        def check_files_exist():
             # Files to check for existence
             files_to_check = ['RQAM.py', 'RQA_CBS.py']
             
             # Check if all files exist
             missing_files = []
             for filename in files_to_check:
-                file_path = os.path.join(save_directory, filename)
-                if not os.path.exists(file_path):
+                if not os.path.exists(filename):
                     missing_files.append(filename)
             return missing_files
 
@@ -40,15 +39,12 @@ def RQA_INTR():
                     f.write(data)
 
         # Example usage:
-        save_directory = os.path.join(os.getenv('LOCALAPPDATA'), 'RQA')
-        missing_files = check_files_exist(save_directory)
+        missing_files = check_files_exist()
         if missing_files:
             print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Installing RQA-Files...\n")
-            os.makedirs(save_directory, exist_ok=True)
             for filename in missing_files:
                 file_url = f"https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/{filename}"
-                file_path = os.path.join(save_directory, filename)
-                download_file(file_url, file_path)
+                download_file(file_url, filename)
             
             os.system("cls")
             print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Successfully installed RCC-Files\n")
