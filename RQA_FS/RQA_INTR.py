@@ -10,21 +10,11 @@ import os
 from colorama import Fore,Back,init
 init(autoreset=True)
 import msvcrt
+import RQAM
+import RQA_CBS
 
 def PTC():
         msvcrt.getch()
-
-try:
-    import RQA_CBS
-except:
-    print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> RQA_CBS import failed!\n")
-    PTC()
-
-try:
-    import RQAM
-except:
-    print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> RQAM import failed!\n")
-    PTC()
 
 #Connection to the Hosting RCC Server
 #==============================================================================#
@@ -33,81 +23,39 @@ RQA_S = "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_S/RQA-S.json"
 
 def RQA_INTR():
     def RQA_Installer():
-        def check_files_exist(json_url):
-            debug = False
-            # Fetch the JSON file
-            response = requests.get(json_url)
-            if response.status_code != 200 and not debug:
-                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+">Error: Couldn't fetch RQA-Files information.\n")
-                exit()
-
-            # Parse JSON data
-            json_data = response.json()
-
-            # Extract links and filenames
-            files_to_check = json_data['RQA-FS'].values()
-
+        def check_files_exist(save_directory):
+            # Files to check for existence
+            files_to_check = ['RQAM.py', 'RQA_CBS.py']
+            
             # Check if all files exist
             missing_files = []
-            for file_url in files_to_check:
-                filename = os.path.basename(file_url)
-                folder_path = os.path.join(os.getenv('LOCALAPPDATA'), 'RQA')
-                file_path = os.path.join(folder_path, filename)
+            for filename in files_to_check:
+                file_path = os.path.join(save_directory, filename)
                 if not os.path.exists(file_path):
                     missing_files.append(filename)
             return missing_files
 
-        def download_files_from_json(json_url):
-            # Fetch the JSON file
-            response = requests.get(json_url)
-            if response.status_code != 200:
-                print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Error couldn't connect to RQA-CBS\n")
-                exit()
+        def download_file(file_url, file_path):
+            response = requests.get(file_url, stream=True)
+            with open(file_path, 'wb') as f:
+                for data in response.iter_content(chunk_size=4096):
+                    f.write(data)
 
-            # Parse JSON data
-            json_data = response.json()
-
-            # Extract links and filenames
-            files_to_download = []
-            for key, value in json_data['RQA-FS'].items():
-                filename = os.path.basename(value)  # Extract filename from URL
-                files_to_download.append({'url': value, 'filename': filename})
-
-            # Download files
-            download_files(files_to_download)
-
-        def download_files(files_to_download):
-            folder_path = os.path.join(os.getenv('LOCALAPPDATA'), 'RQA')
-            os.makedirs(folder_path, exist_ok=True)
-            for file_info in files_to_download:
-                url = file_info['url']
-                filename = file_info['filename']
-                file_path = os.path.join(folder_path, filename)
-                # Check if file already exists, if yes, skip download
-                if os.path.exists(file_path):
-                    pass
-                    continue
-                response = requests.get(url, stream=True)
-                with open(file_path, 'wb') as f:
-                    for data in response.iter_content(chunk_size=4096):
-                        f.write(data)
-
+        # Example usage:
+        save_directory = os.path.join(os.getenv('LOCALAPPDATA'), 'RQA')
+        missing_files = check_files_exist(save_directory)
+        if missing_files:
+            print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Installing RQA-Files...\n")
+            os.makedirs(save_directory, exist_ok=True)
+            for filename in missing_files:
+                file_url = f"https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/{filename}"
+                file_path = os.path.join(save_directory, filename)
+                download_file(file_url, file_path)
+            
             os.system("cls")
             print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Successfully installed RCC-Files\n")
             os.system("cls")
             RQA_CBS_Updater()
-
-        # Example usage:
-        json_url = RQA_S
-        missing_files = check_files_exist(json_url)
-        debug = False
-        if missing_files and not debug:
-            os.system("cls")
-            print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Installing RCC-Files...\n")
-            download_files_from_json(json_url)
-            os.system("cls")
-            RQA_CBS_Updater()
-
         else:
             os.system("cls")
             RQA_CBS_Updater()
@@ -173,17 +121,5 @@ def RQA_INTR():
 
 
     if __name__ == "__main__":
-        try:
-            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Connecting to RQA Server...\n")
-            response = requests.head(RQA_S)
-            if response.status_code == 200:
-                RQA_Installer()
-                PTC()
-            else:
-                os.system("cls")
-                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Error couldn't connect to RQA Server!\n")
-                PTC()
-        except requests.ConnectionError:
-            os.system("cls")
-            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> No internet , Please check your internet connection!\n")
-            PTC()
+        RQA_Installer()
+         
