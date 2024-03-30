@@ -10,8 +10,6 @@ import os
 from colorama import Fore,Back,init
 init(autoreset=True)
 import msvcrt
-import RQAM
-import RQA_CBS
 
 def PTC():
         msvcrt.getch()
@@ -61,9 +59,23 @@ def RQA_INTR():
             RQA_CBS_Updater()
 
     def Lauch_RQA():
+        try:
+            import RQAM
+        except:
+            os.system("cls")
+            print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> (RQA_INTR) Failed to import RQAM\n")
+            PTC()
+            exit()
         RQAM.StartRQA()
 
     def Lauch_RQA_Updater():
+        try:
+            import RQA_CBS
+        except:
+            os.system("cls")
+            print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> (RQA_INTR) Failed to import RQA_CBS\n")
+            PTC()
+            exit()
         RQA_CBS.RQA_Updater()
 
     def RQA_CBS_Updater():
@@ -72,6 +84,14 @@ def RQA_INTR():
         response = requests.get(url)
         data = response.json()
         server_ver = data.get("RQA-CBS", {}).get("Version")
+        
+        try:
+            import RQA_CBS
+        except:
+            os.system("cls")
+            print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> (RQA_INTR) Failed to import RQA_CBS\n")
+            PTC()
+            exit()
 
         # Get local version directly from the imported module
         local_ver = RQA_CBS.RQA_CBS_Version
@@ -122,4 +142,3 @@ def RQA_INTR():
 
     if __name__ == "__main__":
         RQA_Installer()
-         
