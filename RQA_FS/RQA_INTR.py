@@ -1,6 +1,6 @@
 #RQA_Installer_Version
 #==============================#
-RQA_INTR_Version = "100.0.0.1"
+RQA_INTR_Version = "100.0.0.2"
 #==============================#
 
 #RCC Packages
