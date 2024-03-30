@@ -44,7 +44,7 @@ def RQA_Updater():
 
     debug = False
     # Checking if the version matches
-    if not rqa_c_version == RQA_ver and not debug:
+    if rqa_c_version == RQA_ver and not debug:
         os.system("cls")
         print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Updating RQA...\n")
         updater_info = data.get("RQA-FS", {}).get("RQAM")
