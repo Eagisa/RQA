@@ -42,11 +42,11 @@ def RQA_Updater():
 
     RQA_ver =RQAM.RQA_version
 
-    debug = False
     # Checking if the version matches
-    if rqa_c_version != RQA_ver and not debug:
+    if not rqa_c_version == RQA_ver:
         os.system("cls")
         print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Updating RQA...\n")
+        os.remove(os.path.join(os.getenv('LOCALAPPDATA'), 'RQA', 'RQAM.py'))
         updater_info = data.get("RQA-FS", {}).get("RQAM")
         if updater_info:
             file_url = updater_info
@@ -62,3 +62,5 @@ def RQA_Updater():
     else:
         os.system("cls")
         RQAM.StartRQA()
+
+RQA_Updater()
