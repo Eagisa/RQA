@@ -10,7 +10,6 @@ import os
 from colorama import Fore,Back,init
 init(autoreset=True)
 import msvcrt
-import os
 
 def PTC():
         msvcrt.getch()

@@ -1,11 +1,13 @@
+# RCC COnfiguration
+#======================#
+RQA_version = "1.0.0.1"
+RQA_RD = "03/23/2024"
+#======================#
+
 import colorama
 from colorama import Fore, Back, Style
 colorama.init(autoreset=True)
 import os
-
-
-RQA_version = "1.0.4"
-RQA_RD = "3/30/2024"
 
 def StartRQA():
     def title():
