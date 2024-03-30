@@ -1,6 +1,6 @@
 {
-    "RQA-S": {
-      "Class": "RQA-Server",
+    "RQA-INTR": {
+      "Class": "RQA-Installer",
       "Version": "1.1.0.0",
       "Date_Modified": "3/30/2024 1:30 PM"
     },
