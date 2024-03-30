@@ -14,13 +14,6 @@ import time
 def PTC():
     msvcrt.getch()
 
-try:
-    import RQAM
-except:
-    print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> RQAM import failed!\n")
-    PTC()
-    exit()
-
 #=============================================================================#
 RQA_S = "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_S/RQA-S.json"
 #=============================================================================#
@@ -39,6 +32,13 @@ def RQA_Updater():
 
     # Getting the version of RCC-C from the JSON object
     rqa_c_version = data.get("RQA-C", {}).get("Version")
+    
+    try:
+        import RQAM
+    except:
+        print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> (RQA_CBS) RQAM import failed!\n")
+        PTC()
+        exit()
 
     RQA_ver = RQAM.RQA_version
 
