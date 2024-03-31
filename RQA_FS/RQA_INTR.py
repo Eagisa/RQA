@@ -31,13 +31,19 @@ def check_files_exist():
             missing_files.append(filename)
     return missing_files
 
+# Get LocalAppData directory
+localappdata = os.getenv('LOCALAPPDATA')
+rqa_folder = os.path.join(localappdata, 'RQA')
+
 def RQA_INTR_Launcher():
+    os.makedirs(rqa_folder, exist_ok=True)
     missing_files = check_files_exist()
     if missing_files:
         print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Installing RQA-Files...\n")
         for filename in missing_files:
             file_url = f"https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/{filename}"
-            download_file(file_url, filename)
+            file_save_path = os.path.join(rqa_folder, filename)
+            download_file(file_url, file_save_path)
 
         os.system("cls")
         print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Successfully installed RCC-Files\n")
@@ -94,7 +100,7 @@ def RQA_CBS_Updater():
                 rcc_cbs_url = rcc_fs.get("RQA_CBS")
 
                 if rcc_cbs_url:
-                    file_save_path = os.path.join(os.getcwd(), 'RQA_CBS.py')
+                    file_save_path = os.path.join(rqa_folder, 'RQA_CBS.py')
                     download_file(rcc_cbs_url, file_save_path)
                     os.system("cls")
 
