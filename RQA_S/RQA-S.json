@@ -1,10 +1,4 @@
 {
-    "RQA-INTR": {
-      "Class": "RQA-Installer",
-      "Version": "100.0.0.2",
-      "Date_Modified": "3/30/2024 1:30 PM"
-    },
-  
     "RQA-C": {
       "Class": "RQA-Client",
       "Version": "1.0.0.1",
@@ -19,7 +13,6 @@
   
     "RQA-FS": {
       "RQAM": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQAM.py",
-      "RQA_CBS": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQA_CBS.py",
-      "RQA_INTR": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQA_INTR.py"
+      "RQA_CBS": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQA_CBS.py"
     }
 }
