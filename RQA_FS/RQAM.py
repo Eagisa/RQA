@@ -11,29 +11,6 @@ RQA_RD = "04/1/2024"
 #======================#
 
 def StartRQA():
-    #Console configuration
-    #============================================================================================#
-    def change_console_resolution(rows, columns):
-        os.system(f"mode con: cols={columns} lines={rows}")
-
-    def disable_console_resize():
-        hwnd = ctypes.windll.kernel32.GetConsoleWindow()
-
-        # Retrieve the current window style
-        style = ctypes.windll.user32.GetWindowLongW(hwnd, -16)  # -16 corresponds to GWL_STYLE
-
-        # Disable resizing (WS_THICKFRAME and WS_MAXIMIZEBOX)
-        style = style & ~0x00040000  # 0x00040000 corresponds to WS_THICKFRAME
-        style = style & ~0x00010000  # 0x00020000 corresponds to WS_MAXIMIZEBOX
-
-        # Set the modified style
-        ctypes.windll.user32.SetWindowLongW(hwnd, -16, style)
-
-    disable_console_resize()
-    #============================================================================================#
-
-    change_console_resolution(20, 64)
-
     def title():
         print(Fore.LIGHTBLACK_EX+"<+>-----------------------<+>",           " ",Fore.LIGHTBLACK_EX+"<+>----------------------------------------------<+>")
         print("    "+Fore.BLACK+Back.CYAN +   f" RoQuickAcess v{RQA_version} "," ","        "+Fore.BLACK+Style.NORMAL+Back.GREEN + " UPDATE ",":",Fore.LIGHTYELLOW_EX+"Functioning..")
