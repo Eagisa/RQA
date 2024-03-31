@@ -5,14 +5,14 @@ import os
 
 # RCC COnfiguration
 #======================#
-RQA_version = "1.0.0.2"
+RQA_version = "1.0.0.3"
 RQA_RD = "04/1/2024"
 #======================#
 
 def StartRQA():
     def title():
         print(Fore.LIGHTBLACK_EX+"<+>-----------------------<+>",           " ",Fore.LIGHTBLACK_EX+"<+>----------------------------------------------<+>")
-        print("    "+Fore.BLACK+Back.CYAN +   f" RoQuickAcess v{RQA_version} "," ","        "+Fore.BLACK+Style.NORMAL+Back.GREEN + " UPDATE ",":",Fore.LIGHTYELLOW_EX+"More Feeatures will be added soon")
+        print("    "+Fore.BLACK+Back.CYAN +   f" RoQuickAcess v{RQA_version} "," ","        "+Fore.BLACK+Style.NORMAL+Back.GREEN + " UPDATE ",":",Fore.LIGHTYELLOW_EX+"Functioning..")
         print(Fore.LIGHTBLACK_EX+"<+>-----------------------<+>",                         " ",Fore.LIGHTBLACK_EX+"<+>----------------------------------------------<+>")
         print("\n")
         print("                       ",Back.LIGHTRED_EX+Fore.BLACK+" How to use ? ",Fore.BLACK+"[How to use?]")
