@@ -6,7 +6,7 @@ import ctypes
 
 # RCC COnfiguration
 #======================#
-RQA_version = "1.0.0.6"
+RQA_version = "1.0.0.1"
 RQA_RD = "04/1/2024"
 #======================#
 
