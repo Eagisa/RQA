@@ -5,8 +5,8 @@ import os
 
 # RCC COnfiguration
 #======================#
-RQA_version = "1.0.0.1"
-RQA_RD = "03/23/2024"
+RQA_version = "1.0.0.2"
+RQA_RD = "04/1/2024"
 #======================#
 
 def StartRQA():
