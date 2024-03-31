@@ -135,6 +135,4 @@ def RQA_INTR_Laucher():
             with open(save_path, 'wb') as f:
                 f.write(response.content)
 
-
-    if __name__ == "__main__":
-        RQA_Installer()
+    RQA_Installer()
