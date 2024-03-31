@@ -6,6 +6,7 @@
     },
   
     "RQA-FS": {
-      "RQAM": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQAM.py"
+      "RQAM": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQAM.py",
+      "RATXT": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/Hello.txt"
     }
 }
