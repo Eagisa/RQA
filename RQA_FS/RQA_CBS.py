@@ -1,3 +1,8 @@
+#RQA_CBS Version
+#=========================#
+RQA_CBS_Ver = "101.3.0.0"
+#=========================#
+
 import requests
 import os
 from colorama import Fore,Back,init
@@ -6,11 +11,6 @@ import msvcrt
 import os
 import time
 import importlib.util
-
-#RQA_CBS Version
-#=========================#
-RQA_CBS_Ver = "101.3.0.0"
-#=========================#
 
 #=============================================================================#
 RQA_S = "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_S/RQA-S.json"
