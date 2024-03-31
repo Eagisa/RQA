@@ -5,14 +5,7 @@
       "Date_Modified": "3/30/2024 1:31 PM"
     },
   
-    "RQA-CBS":{
-      "Class":"RQA-BootStrapper",
-      "Version": "101.3.0.0",
-      "Date_Modified": "3/30/2024 1:19 PM"
-    },
-  
     "RQA-FS": {
-      "RQAM": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQAM.py",
-      "RQA_CBS": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQA_CBS.py"
+      "RQAM": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQAM.py"
     }
 }
