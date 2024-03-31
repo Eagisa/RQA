@@ -19,7 +19,7 @@ def PTC():
 RQA_S = "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_S/RQA-S.json"
 #==============================================================================#
 
-def RQA_INTR():
+def RQA_INTR_Laucher():
     def RQA_Installer():
         def check_files_exist():
             # Files to check for existence
