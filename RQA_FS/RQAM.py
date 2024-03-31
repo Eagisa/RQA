@@ -5,11 +5,12 @@ import os
 
 # RCC COnfiguration
 #======================#
-RQA_version = "1.0.0.3"
+RQA_version = "1.0.0.4"
 RQA_RD = "04/1/2024"
 #======================#
 
 def StartRQA():
+    os.system("cls")
     def title():
         print(Fore.LIGHTBLACK_EX+"<+>-----------------------<+>",           " ",Fore.LIGHTBLACK_EX+"<+>----------------------------------------------<+>")
         print("    "+Fore.BLACK+Back.CYAN +   f" RoQuickAcess v{RQA_version} "," ","        "+Fore.BLACK+Style.NORMAL+Back.GREEN + " UPDATE ",":",Fore.LIGHTYELLOW_EX+"Functioning..")
