@@ -1,11 +1,12 @@
 {
     "RQA-C": {
       "Class": "RQA-Client",
-      "Version": "1.0.0.1",
+      "Version": "1.0.1.3",
       "Date_Modified": "04/1/2024 2:42 AM"
     },
   
     "RQA-FS": {
-      "RQAM": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQAM.py"
+      "RQAM": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQAM.py",
+      "RQA_Req": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQA_Req.py"
     }
 }
