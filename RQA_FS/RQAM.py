@@ -7,7 +7,7 @@ import requests
 
 # RQA COnfiguration
 #======================#
-RQA_version = "1.0.4.5"
+RQA_version = "1.0.5.0"
 RQA_RD = "04/1/2024"
 #======================#
 
