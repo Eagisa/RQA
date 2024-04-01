@@ -3,6 +3,8 @@ import colorama
 from colorama import Fore, Back, Style
 colorama.init(autoreset=True)
 import os
+import importlib.util
+
 
 def Get_User_Information():
     def get_user_data_by_username(username):
@@ -32,7 +34,11 @@ def Get_User_Information():
         # Check if the input is 'exit', then break the loop
         if username.lower() == '`':
             os.system("cls")
-            import RQAM
+            local_appdata = os.getenv('LOCALAPPDATA')
+            pyc_file_path = os.path.join(local_appdata, 'RQA', 'RQAM.py')
+            spec = importlib.util.spec_from_file_location("RQAM", pyc_file_path)
+            RQAM = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(RQAM)
             RQAM.StartRQA()
         
         user_data = get_user_data_by_username(username)

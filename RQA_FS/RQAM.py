@@ -4,12 +4,20 @@ colorama.init(autoreset=True)
 import os
 import time
 import requests
+import importlib.util
 
 # RQA COnfiguration
 #======================#
-RQA_version = "1.0.5.0"
+RQA_version = "1.0.6.0"
 RQA_RD = "04/1/2024"
 #======================#
+
+
+local_appdata = os.getenv('LOCALAPPDATA')
+pyc_file_path = os.path.join(local_appdata, 'RQA', 'RQA_Req.py')
+spec = importlib.util.spec_from_file_location("RQA_Req", pyc_file_path)
+RQA_Req = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(RQA_Req)
 
 def StartRQA():
     def title():
@@ -45,7 +53,6 @@ def StartRQA():
 
             if req_numer == '1':
                 os.system("cls")
-                import RQA_Req
                 RQA_Req.Get_User_Information()
 
             elif req_numer == '2':
