@@ -5,9 +5,9 @@ import os
 import time
 import requests
 
-# RCC COnfiguration
+# RQA COnfiguration
 #======================#
-RQA_version = "1.0.1.3"
+RQA_version = "1.0.4.5"
 RQA_RD = "04/1/2024"
 #======================#
 
@@ -65,5 +65,3 @@ def StartRQA():
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That was invailed!\n")
 
     main()
-
-StartRQA()
