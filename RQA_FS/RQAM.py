@@ -2,79 +2,68 @@ import colorama
 from colorama import Fore, Back, Style
 colorama.init(autoreset=True)
 import os
-import ctypes
+import time
+import requests
 
 # RCC COnfiguration
 #======================#
-RQA_version = "1.0.0.1"
+RQA_version = "1.0.1.3"
 RQA_RD = "04/1/2024"
 #======================#
 
 def StartRQA():
     def title():
-        print(Fore.LIGHTBLACK_EX+"<+>-----------------------<+>",           " ",Fore.LIGHTBLACK_EX+"<+>----------------------------------------------<+>")
-        print("    "+Fore.BLACK+Back.CYAN +   f" RoQuickAcess v{RQA_version} "," ","        "+Fore.BLACK+Style.NORMAL+Back.GREEN + " UPDATE ",":",Fore.LIGHTYELLOW_EX+"Functioning..")
-        print(Fore.LIGHTBLACK_EX+"<+>-----------------------<+>",                         " ",Fore.LIGHTBLACK_EX+"<+>----------------------------------------------<+>")
+        print(Fore.LIGHTBLACK_EX+"<+>-------------------------<+>",           " ",Fore.LIGHTBLACK_EX+"<+>---------------------------------------------------------------<+>")
+        print("    "+Fore.BLACK+Back.LIGHTBLUE_EX +   f" RoQuickAcess v{RQA_version} "," ","        "+Fore.BLACK+Style.NORMAL+Back.LIGHTGREEN_EX + " UPDATE ",":",Fore.LIGHTYELLOW_EX+"RQA is still in-BETA, more updates will come soon!")
+        print(Fore.LIGHTBLACK_EX+"<+>-------------------------<+>",                         " ",Fore.LIGHTBLACK_EX+"<+>---------------------------------------------------------------<+>")
         print("\n")
-        print("                       ",Back.LIGHTRED_EX+Fore.BLACK+" How to use ? ",Fore.BLACK+"[How to use?]")
-        print(Fore.LIGHTBLACK_EX+"<+>------------------------------------------------------------<+>")
-        print("  ",Back.RED+Fore.BLACK + " NOTE ",":",Fore.LIGHTYELLOW_EX + "Choose the number that you wanna access down below!")
-        print(Fore.LIGHTBLACK_EX+"<+>------------------------------------------------------------<+>")
+        print(Fore.LIGHTBLACK_EX+"<+>----------------------------------------------<+>")
+        print("   ",Back.LIGHTRED_EX+Fore.BLACK + " How to use ? ",">",Fore.LIGHTYELLOW_EX + "Choose an number to request")
+        print(Fore.LIGHTBLACK_EX+"<+>----------------------------------------------<+>")
         print('\n')
-        print("                           ",Back.LIGHTWHITE_EX+Fore.BLACK+" RoQuickAccess ",Fore.BLACK+"Ro")
-        print(Fore.LIGHTBLACK_EX+"<+>-----------------------------------------------------------------<+>")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(1) -> Group Information",Fore.LIGHTBLACK_EX+"                      |"," ",Back.GREEN+Fore.BLACK+" Operational ",Fore.LIGHTBLACK_EX+" |",Fore.BLACK+"[Status]",)
-        print(Fore.LIGHTBLACK_EX+" |------------------------------------------------|------------------|")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(2) -> Asset Information                      ",Fore.LIGHTBLACK_EX+"|"," ",Back.GREEN+Fore.BLACK+" Operational ",Fore.LIGHTBLACK_EX+" |",Fore.BLACK+"[Status]")
-        print(Fore.LIGHTBLACK_EX+" |------------------------------------------------|------------------|")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(3) -> Send ItemAssets                        ",Fore.LIGHTBLACK_EX+"|"," ",Back.GREEN+Fore.BLACK+" Operational ",Fore.LIGHTBLACK_EX+" |",Fore.BLACK+"[Status]")
-        print(Fore.LIGHTBLACK_EX+" |------------------------------------------------|------------------|")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(4) -> Get Group Roles",Fore.LIGHTBLACK_EX+"                        |"," ",Back.RED+Fore.BLACK+" Disruption  ",Fore.LIGHTBLACK_EX+" |",Fore.BLACK+"[Status]")
-        print(Fore.LIGHTBLACK_EX+" |------------------------------------------------|------------------|")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(5) -> Get Group Description",Fore.LIGHTBLACK_EX+"                  |"," ",Back.RED+Fore.BLACK+" Disruption  ",Fore.LIGHTBLACK_EX+" |",Fore.BLACK+"[Status]")
-        print(Fore.LIGHTBLACK_EX+" |------------------------------------------------|------------------|")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(6) -> Get Game Current Players",Fore.LIGHTBLACK_EX+"               |"," ",Back.RED+Fore.BLACK+" Disruption  ",Fore.LIGHTBLACK_EX+" |",Fore.BLACK+"[Status]")
-        print(Fore.LIGHTBLACK_EX+"<+>-----------------------------------------------------------------<+>")
+    
+    def menu():
+        print("             ",Back.LIGHTWHITE_EX+Fore.BLACK+" Menu ",Fore.BLACK+"Ro")
+        print(Fore.LIGHTBLACK_EX+"<+>----------------------------<+>")
+        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(1) -> Get User Information",Fore.LIGHTBLACK_EX+" |")
+        print(Fore.LIGHTBLACK_EX+" |------------------------------|")
+        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(2) -> Coming soon...",Fore.LIGHTBLACK_EX+"       |")
+        print(Fore.LIGHTBLACK_EX+" |------------------------------|")
+        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(3) -> Coming soon...",Fore.LIGHTBLACK_EX+"       |")
+        print(Fore.LIGHTBLACK_EX+" |------------------------------|")
+        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(4) -> Coming soon...",Fore.LIGHTBLACK_EX+"       |")
+        print(Fore.LIGHTBLACK_EX+"<+>----------------------------<+>")
         print("\n")
 
     def main():
         #Main theme of the RoQuickAccess App
         title()
+        menu()
 
         while True:
+            req_numer = input(Fore.LIGHTYELLOW_EX+"> ")
 
-            task = input(Fore.LIGHTYELLOW_EX+">:").strip()
+            if req_numer == '1':
+                os.system("cls")
+                import RQA_Req
+                RQA_Req.Get_User_Information()
 
-            
-            #Group Information
-            if task == '1':
-                print("Erro")
+            elif req_numer == '2':
+                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Not-available\n")
 
-            #Asset Information
-            elif task == '2':
-                print("Erro")
+            elif req_numer == '3':
+                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Not-available\n")
 
-            #Send Item to Discord
-            elif task == '3':
-                print("Not avaliable")
+            elif req_numer == '4':
+                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Not-available\n")
 
-            elif task == '4':
-                print("The Access was declined! (Due to issue or in-development)")
-            
-            elif task == '5':
-                print("The Access was declined! (Due to issue or in-development)")
-            
-            elif task == '6':
-                print("The Access was declined! (Due to issue or in-development)")
-
-            #Restart the program
-            elif task == 'clear':
+            elif req_numer == 'clear':
                 os.system("cls")
                 main()
-            #Print if something went wrong
+
             else:
-                print('Sorry there is no',Fore.LIGHTYELLOW_EX+task,Fore.LIGHTYELLOW_EX+'command in system')
-
-
+                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That was invailed!\n")
 
     main()
+
+StartRQA()
