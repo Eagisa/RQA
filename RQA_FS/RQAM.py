@@ -8,8 +8,8 @@ import importlib.util
 
 # RQA COnfiguration
 #======================#
-RQA_version = "1.0.6.0"
-RQA_RD = "04/1/2024"
+RQA_version = "1.0.7.5"
+RQA_RD = "04/2/2024"
 #======================#
 
 

@@ -42,18 +42,39 @@ def Get_User_Information():
             RQAM.StartRQA()
         
         user_data = get_user_data_by_username(username)
+
         if user_data:
             if user_data["data"]:  # Check if data list is not empty
                 user_info = user_data["data"][0]
-                id = user_info.get("id")
+                User_id = user_info.get("id")
                 name = user_info.get("name")
                 displayName = user_info.get("displayName")
                 hasVerifiedBadge = user_info.get("hasVerifiedBadge")
+
+                #Gets user detailed information by id
+                #==========================================================#
+                url = f"https://users.roblox.com/v1/users/{User_id}"
+                response = requests.get(url)
+                # Checking if request was successful (status code 200)
+                if response.status_code == 200:
+                    # Parsing JSON response
+                    data = response.json()
+                    is_banned = data.get("isBanned")
+                    created = data.get("created")
+                    description = data.get("description")
+                #==========================================================#
+
+                #Prints the user information
+                #=================================================================#
                 print("")
-                print(Fore.LIGHTYELLOW_EX+f"User ID       : {id}")
+                print(Fore.LIGHTYELLOW_EX+f"User ID       : {User_id}")
                 print(Fore.LIGHTYELLOW_EX+f"Username      : {name}")
                 print(Fore.LIGHTYELLOW_EX+f"DisplayName   : {displayName}")
                 print(Fore.LIGHTYELLOW_EX+f"VerifiedBadge : {hasVerifiedBadge}")
+                print(Fore.LIGHTYELLOW_EX+f"IsBanned      : {is_banned}")
+                print(Fore.LIGHTYELLOW_EX+f"created       : {created}")
+                print(Fore.LIGHTYELLOW_EX+f"description   : {description}")
                 print("")
+                #=================================================================#
             else:
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> User doesn't exist.\n")
