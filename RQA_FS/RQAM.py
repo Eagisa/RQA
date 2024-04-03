@@ -2,14 +2,12 @@ import colorama
 from colorama import Fore, Back, Style
 colorama.init(autoreset=True)
 import os
-import time
-import requests
 import importlib.util
 
 # RQA COnfiguration
 #======================#
-RQA_version = "1.0.7.5"
-RQA_RD = "04/2/2024"
+RQA_version = "1.1.2.0"
+RQA_RD = "04/4/2024"
 #======================#
 
 
@@ -29,29 +27,50 @@ def StartRQA():
         print("   ",Back.LIGHTRED_EX+Fore.BLACK + " How to use ? ",">",Fore.LIGHTYELLOW_EX + "Choose an number to request")
         print(Fore.LIGHTBLACK_EX+"<+>----------------------------------------------<+>")
         print('\n')
-    
+
+    def Show_Account_Authenticated():
+        session = RQA_Req.session
+        try:
+            getuser = session.get("https://users.roblox.com/v1/users/authenticated")
+            getuser2 = getuser.json()
+            getuser4 = getuser2['name']
+            print("<+>--------------------------------------------------------------------<+>\n")
+            print(Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+f"> Authentication Logged in as {getuser4}")
+            print("<+>--------------------------------------------------------------------<+>\n")
+        except Exception as e:
+            print("<+>--------------------------------------------------------------------<+>\n")
+            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your cookies are invalid\n")
+            print("<+>--------------------------------------------------------------------<+>\n")
+            
     def menu():
         print("             ",Back.LIGHTWHITE_EX+Fore.BLACK+" Menu ",Fore.BLACK+"Ro")
         print(Fore.LIGHTBLACK_EX+"<+>----------------------------<+>")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(1) -> Get User Information",Fore.LIGHTBLACK_EX+" |")
+        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(0) -> Install Cookies",Fore.LIGHTBLACK_EX+" |")
+        print(Fore.LIGHTBLACK_EX+" |------------------------------|")
+        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(1) -> Get User Information",Fore.LIGHTBLACK_EX+"       |")
         print(Fore.LIGHTBLACK_EX+" |------------------------------|")
         print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(2) -> Coming soon...",Fore.LIGHTBLACK_EX+"       |")
         print(Fore.LIGHTBLACK_EX+" |------------------------------|")
         print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(3) -> Coming soon...",Fore.LIGHTBLACK_EX+"       |")
-        print(Fore.LIGHTBLACK_EX+" |------------------------------|")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(4) -> Coming soon...",Fore.LIGHTBLACK_EX+"       |")
         print(Fore.LIGHTBLACK_EX+"<+>----------------------------<+>")
         print("\n")
 
     def main():
         #Main theme of the RoQuickAccess App
         title()
+        Show_Account_Authenticated()
         menu()
 
         while True:
             req_numer = input(Fore.LIGHTYELLOW_EX+"> ")
 
-            if req_numer == '1':
+            #Install Cookies
+            if req_numer == '0':
+                os.system("cls")
+                RQA_Req.Install_Cookie()
+            
+            #Get User Information
+            elif req_numer == '1':
                 os.system("cls")
                 RQA_Req.Get_User_Information()
 
@@ -59,9 +78,6 @@ def StartRQA():
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Not-available\n")
 
             elif req_numer == '3':
-                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Not-available\n")
-
-            elif req_numer == '4':
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Not-available\n")
 
             elif req_numer == 'clear':
