@@ -88,5 +88,3 @@ def StartRQA():
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That was invailed!\n")
 
     main()
-
-StartRQA()
