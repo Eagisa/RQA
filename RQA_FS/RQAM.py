@@ -6,7 +6,7 @@ import importlib.util
 
 # RQA COnfiguration
 #======================#
-RQA_version = "1.1.2.0"
+RQA_version = "1.1.3.0"
 RQA_RD = "04/4/2024"
 #======================#
 
@@ -34,13 +34,13 @@ def StartRQA():
             getuser = session.get("https://users.roblox.com/v1/users/authenticated")
             getuser2 = getuser.json()
             getuser4 = getuser2['name']
-            print("<+>--------------------------------------------------------------------<+>\n")
-            print(Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+f"> Authentication Logged in as {getuser4}")
-            print("<+>--------------------------------------------------------------------<+>\n")
+            print(Fore.BLACK+Back.LIGHTGREEN_EX+"<+>-------------------------------------------------------<+>\n")
+            print("",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ",Fore.LIGHTYELLOW_EX+f"> Authentication Logged in as {getuser4}")
+            print(Fore.BLACK+Back.LIGHTGREEN_EX+"<+>-------------------------------------------------------<+>\n")
         except Exception as e:
-            print("<+>--------------------------------------------------------------------<+>\n")
-            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your cookies are invalid\n")
-            print("<+>--------------------------------------------------------------------<+>\n")
+            print(Fore.BLACK+Back.LIGHTGREEN_EX+"<+>-----------------------------------------------------------<+>\n")
+            print("",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your cookies are invalid")
+            print(Fore.BLACK+Back.LIGHTGREEN_EX+"<+>-----------------------------------------------------------<+>\n")
             
     def menu():
         print("             ",Back.LIGHTWHITE_EX+Fore.BLACK+" Menu ",Fore.BLACK+"Ro")
