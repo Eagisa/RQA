@@ -6,8 +6,8 @@ import importlib.util
 
 # RQA COnfiguration
 #======================#
-RQA_version = "1.1.4.0"
-RQA_RD = "04/4/2024"
+RQA_version = "1.2.5.0"
+RQA_RD = "04/05/2024"
 #======================#
 
 
@@ -34,20 +34,20 @@ def StartRQA():
             getuser = session.get("https://users.roblox.com/v1/users/authenticated")
             getuser2 = getuser.json()
             getuser4 = getuser2['name']
-            print(Fore.LIGHTBLACK_EX+"<+>-------------------------------------------------------<+>\n")
-            print("",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ",Fore.LIGHTYELLOW_EX+f"> Authentication Logged in as {getuser4}")
-            print(Fore.LIGHTBLACK_EX+"<+>-------------------------------------------------------<+>\n")
+            print(Fore.LIGHTBLACK_EX+"<+>-------------------------------------------------<+>")
+            print("   ",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ",Fore.LIGHTYELLOW_EX+f"> Authentication Logged in as {getuser4}")
+            print(Fore.LIGHTBLACK_EX+"<+>-------------------------------------------------<+>")
         except Exception as e:
-            print(Fore.LIGHTBLACK_EX+"<+>-----------------------------------------------------------<+>\n")
-            print("",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your cookies are invalid")
-            print(Fore.LIGHTBLACK_EX+"<+>-----------------------------------------------------------<+>\n")
+            print(Fore.LIGHTBLACK_EX+"<+>-----------------------------------------------------------<+>")
+            print("   ",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your cookies are invalid")
+            print(Fore.LIGHTBLACK_EX+"<+>-----------------------------------------------------------<+>")
             
     def menu():
         print("             ",Back.LIGHTWHITE_EX+Fore.BLACK+" Menu ",Fore.BLACK+"Ro")
         print(Fore.LIGHTBLACK_EX+"<+>----------------------------<+>")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(0) -> Install Cookies",Fore.LIGHTBLACK_EX+" |")
+        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(0) -> Install Cookies",Fore.LIGHTBLACK_EX+"      |")
         print(Fore.LIGHTBLACK_EX+" |------------------------------|")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(1) -> Get User Information",Fore.LIGHTBLACK_EX+"       |")
+        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(1) -> Get User Information",Fore.LIGHTBLACK_EX+" |")
         print(Fore.LIGHTBLACK_EX+" |------------------------------|")
         print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(2) -> Coming soon...",Fore.LIGHTBLACK_EX+"       |")
         print(Fore.LIGHTBLACK_EX+" |------------------------------|")

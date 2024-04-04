@@ -196,6 +196,48 @@ def Get_User_Information():
                         User_Last_Online = ist_time.strftime("%Y-%m-%d %I:%M %p")
                 else:
                     print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Presence API Error\n")
+                #=========================================================================================================================================#
+
+
+                # Inventory API
+                #==========================================================================================================================#
+                try:
+                    response = session.get(f"https://inventory.roblox.com/v1/users/{User_id}/can-view-inventory")
+                    if response.status_code == 200:
+                        inventory_data = response.json()
+                        can_view = inventory_data.get('canView')
+                    else:
+                        print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Failed to fetch inventory data\n")
+                        PTC()
+                except Exception as e:
+                    print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+f"> Error: {e}\n")
+                    PTC()
+                #==========================================================================================================================#
+
+                # Friends/Following/Followers, API
+                #============================================================================================#
+                def get_user_counts(user_id):
+                    urls = [
+                        f"https://friends.roblox.com/v1/users/{user_id}/followers/count",
+                        f"https://friends.roblox.com/v1/users/{user_id}/followings/count",
+                        f"https://friends.roblox.com/v1/users/{user_id}/friends/count"
+                    ]
+                    counts = {}
+
+                    for url in urls:
+                        response = requests.get(url)
+                        data = response.json()
+                        count_type = url.split('/')[-2]
+                        counts[count_type] = data.get("count", 0)
+
+                    return counts
+
+                user_player_id = User_id  # Replace with the desired user ID
+                user_counts = get_user_counts(user_player_id)
+                Followers = user_counts.get("followers", 0)
+                Following = user_counts.get("followings", 0)
+                Friends = user_counts.get("friends", 0)
+                #============================================================================================#
 
                 def User_Status():
                     if userPresenceType == 0:
@@ -218,6 +260,10 @@ def Get_User_Information():
                 print(Fore.LIGHTYELLOW_EX+f"DisplayName   : {displayName}")
                 print(Fore.LIGHTYELLOW_EX+f"VerifiedBadge : {hasVerifiedBadge}")
                 print(Fore.LIGHTYELLOW_EX+f"IsBanned      : {is_banned}")
+                print(Fore.LIGHTYELLOW_EX+f"Followers     : {Followers}")
+                print(Fore.LIGHTYELLOW_EX+f"Followings    : {Following}")
+                print(Fore.LIGHTYELLOW_EX+f"Friends       : {Friends}")
+                print(Fore.LIGHTYELLOW_EX+f"canView       : {can_view}")
                 User_Status()
                 print(Fore.LIGHTYELLOW_EX+f"Playing       : {playing_location}")
                 print(Fore.LIGHTYELLOW_EX+f"Placeid       : {place_id}")
