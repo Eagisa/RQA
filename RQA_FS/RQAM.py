@@ -6,7 +6,7 @@ import importlib.util
 
 # RQA COnfiguration
 #======================#
-RQA_version = "1.1.3.5"
+RQA_version = "1.1.4.0"
 RQA_RD = "04/4/2024"
 #======================#
 
@@ -88,3 +88,5 @@ def StartRQA():
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That was invailed!\n")
 
     main()
+
+StartRQA()
