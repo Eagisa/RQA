@@ -161,9 +161,7 @@ def Get_User_Information():
                 }
 
                 data = {
-                "userIds": [
-                    {User_id} 
-                ]
+                    "userIds": list({User_id})
                 }
 
                 response = session.post('https://presence.roblox.com/v1/presence/users', headers=headers, data=json.dumps(data))
