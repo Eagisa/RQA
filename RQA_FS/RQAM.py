@@ -6,7 +6,7 @@ import importlib.util
 
 # RQA COnfiguration
 #======================#
-RQA_version = "1.2.5.0"
+RQA_version = "1.2.5.5"
 RQA_RD = "04/05/2024"
 #======================#
 
@@ -36,11 +36,11 @@ def StartRQA():
             getuser4 = getuser2['name']
             print(Fore.LIGHTBLACK_EX+"<+>-------------------------------------------------<+>")
             print("   ",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ",Fore.LIGHTYELLOW_EX+f"> Authentication Logged in as {getuser4}")
-            print(Fore.LIGHTBLACK_EX+"<+>-------------------------------------------------<+>")
+            print(Fore.LIGHTBLACK_EX+"<+>-------------------------------------------------<+>\n")
         except Exception as e:
             print(Fore.LIGHTBLACK_EX+"<+>-----------------------------------------------------------<+>")
             print("   ",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your cookies are invalid")
-            print(Fore.LIGHTBLACK_EX+"<+>-----------------------------------------------------------<+>")
+            print(Fore.LIGHTBLACK_EX+"<+>-----------------------------------------------------------<+>\n")
             
     def menu():
         print("             ",Back.LIGHTWHITE_EX+Fore.BLACK+" Menu ",Fore.BLACK+"Ro")
