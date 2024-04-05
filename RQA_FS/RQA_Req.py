@@ -30,23 +30,42 @@ def Install_Cookie():
     cookie = input("> ")
     config_data = {"cookie": cookie}
     try:
-        with open(config_file_path, 'w') as config_file:
-            json.dump(config_data, config_file, indent=4)
         os.system("cls")
-        print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Successfully installed cookie!\n")
-        time.sleep(1.3)
-        os.system("cls")
-        local_appdata = os.getenv('LOCALAPPDATA')
-        pyc_file_path = os.path.join(local_appdata, 'RQA', 'RQAM.py')
-        spec = importlib.util.spec_from_file_location("RQAM", pyc_file_path)
-        RQAM = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(RQAM)
-        RQAM.StartRQA()
-        return True
+        print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Please wait, Verifying Cookies...\n")
+        getuser = session.get("https://users.roblox.com/v1/users/authenticated")
+        getuser2 = getuser.json()
+        getuser4 = getuser2['name']
+        if getuser4:
+            os.system("cls")
+            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+f"> Congrats, Your Cookies are Validated!\n")
+            time.sleep(1.3)
+            try:
+                with open(config_file_path, 'w') as config_file:
+                    json.dump(config_data, config_file, indent=4)
+                local_appdata = os.getenv('LOCALAPPDATA')
+                pyc_file_path = os.path.join(local_appdata, 'RQA', 'RQAM.py')
+                spec = importlib.util.spec_from_file_location("RQAM", pyc_file_path)
+                RQAM = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(RQAM)
+                os.system("cls")
+                RQAM.StartRQA()
+                return True
+            except Exception as e:
+                os.system("cls")
+                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Error saving Config.json file:", e)
+                return False
+        else:
+            os.system("cls")
+            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your cookies are invalid\n")
+            time.sleep(1.3)
+            os.system("cls")
+            Install_Cookie()
     except Exception as e:
         os.system("cls")
-        print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Error saving Config.json file:", e)
-        return False
+        print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+f"> Error couldn't authenticate {e}")
+        time.sleep(1.3)
+        os.system("cls")
+        Install_Cookie()
 #=================================================================================================================================================#
 
 #loads Config.json file
