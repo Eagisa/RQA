@@ -27,15 +27,24 @@ def Install_Cookie():
         os.makedirs(config_dir)
     os.system("cls")
     print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Enter the valid cookie\n")
-    cookie = input("> ")
+    cookie = input(Fore.LIGHTYELLOW_EX+"> ")
+
+    # Session setup
+    session = requests.Session()
+    session.cookies[".ROBLOSECURITY"] = cookie
+    req = session.post(url="https://auth.roblox.com/")
+    if "X-CSRF-Token" in req.headers: 
+        csrf_token = req.headers["X-CSRF-Token"]
+        session.headers["X-CSRF-Token"] = csrf_token
+    
     config_data = {"cookie": cookie}
     try:
         os.system("cls")
         print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Please wait, Verifying Cookies...\n")
         getuser = session.get("https://users.roblox.com/v1/users/authenticated")
-        getuser2 = getuser.json()
-        getuser4 = getuser2['name']
-        if getuser4:
+        if getuser.status_code == 200:
+            getuser2 = getuser.json()
+            getuser4 = getuser2.get('name')
             os.system("cls")
             print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+f"> Congrats, Your Cookies are Validated!\n")
             time.sleep(1.3)
@@ -56,7 +65,7 @@ def Install_Cookie():
                 return False
         else:
             os.system("cls")
-            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your cookies are invalid\n")
+            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your Cookies are invalied!\n")
             time.sleep(1.3)
             os.system("cls")
             Install_Cookie()
