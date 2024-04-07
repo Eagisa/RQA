@@ -9,9 +9,18 @@ import json
 from datetime import datetime
 import msvcrt
 import time
+from playsound import playsound
 
 def PTC():
     msvcrt.getch()
+
+#Sound effects for RQA
+#================================================================#
+# Get the path to the LocalAppData folder
+localappdata_path = os.environ.get('LOCALAPPDATA')
+# Construct the path to the file within the RQA folder
+Error_sound = os.path.join(localappdata_path, 'RQA', 'Error.mp3')
+#================================================================#
 
 #Install new valid cookies
 #=================================================================================================================================================#
@@ -20,6 +29,8 @@ def Install_Cookie():
     local_app_data = os.environ.get('LOCALAPPDATA')
     if not local_app_data:
         print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Error: LOCALAPPDATA environment variable not set.\n")
+        playsound(Error_sound)
+        PTC()
         return False
     config_dir = os.path.join(local_app_data, 'RQA')
     config_file_path = os.path.join(config_dir, 'Config.json')
@@ -66,12 +77,14 @@ def Install_Cookie():
         else:
             os.system("cls")
             print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your Cookies are invalied!\n")
+            playsound(Error_sound)
             time.sleep(1.3)
             os.system("cls")
             Install_Cookie()
     except Exception as e:
         os.system("cls")
         print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+f"> Error couldn't authenticate {e}")
+        playsound(Error_sound)
         time.sleep(1.3)
         os.system("cls")
         Install_Cookie()
@@ -302,4 +315,5 @@ def Get_User_Information():
                 #=================================================================#
             else:
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> User doesn't exist.\n")
+                playsound(Error_sound)
 #===================================================================================================================================================#

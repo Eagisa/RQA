@@ -6,7 +6,7 @@ import importlib.util
 
 # RQA COnfiguration
 #======================#
-RQA_version = "1.5.2.0"
+RQA_version = "1.6.1.1"
 RQA_RD = "04/07/2024"
 #======================#
 
