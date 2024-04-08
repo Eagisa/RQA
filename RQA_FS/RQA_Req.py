@@ -20,6 +20,7 @@ def PTC():
 localappdata_path = os.environ.get('LOCALAPPDATA')
 # Construct the path to the file within the RQA folder
 Error_sound = os.path.join(localappdata_path, 'RQA', 'Error.mp3')
+Res_sound = os.path.join(localappdata_path, 'RQA', 'Res.mp3')
 #================================================================#
 
 #Install new valid cookies
@@ -67,6 +68,7 @@ def Install_Cookie():
             getuser4 = getuser2.get('name')
             os.system("cls")
             print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+f"> Congrats, Your Cookies are Validated!\n")
+            playsound(Res_sound)
             time.sleep(1.3)
             try:
                 with open(config_file_path, 'w') as config_file:
@@ -300,11 +302,36 @@ def Get_User_Information():
                         print(Fore.LIGHTYELLOW_EX+f"UserStatus    : InStudio")
                     elif userPresenceType == 4:
                         print(Fore.LIGHTYELLOW_EX+f"UserStatus    : Invisible")
-
-
+                
+                def Description():
+                    if description == "":
+                        print(Fore.LIGHTYELLOW_EX+"Description   : This user has no description")
+                    else:
+                        print(Fore.LIGHTYELLOW_EX+f"Description   : {description}")
+                
+                def PlayingCheck():
+                    if userPresenceType == 0:
+                        print(Fore.LIGHTYELLOW_EX+"Playing       : {User is Offline}")
+                    else:
+                        if playing_location == "":
+                            print(Fore.LIGHTYELLOW_EX+"Playing       : {Encrypted}")
+                        else:
+                            print(Fore.LIGHTYELLOW_EX+f"Playing       : {playing_location}")
+                
+                def PlaceID_Check():
+                    if userPresenceType == 0 or userPresenceType == 1 or userPresenceType == 3 or userPresenceType == 4:
+                        print(Fore.LIGHTYELLOW_EX+"Placeid       : {User is not playing}")
+                    else:
+                        if userPresenceType == 2:
+                            if place_id == None:
+                                print(Fore.LIGHTYELLOW_EX+"Placeid       : {Encrypted}")
+                            else:
+                                print(Fore.LIGHTYELLOW_EX+f"Placeid       : {place_id}")
+            
                 #Prints the user information
                 #=================================================================#
                 print("")
+                playsound(Res_sound)
                 print(Fore.LIGHTYELLOW_EX+f"UserID        : {User_id}")
                 print(Fore.LIGHTYELLOW_EX+f"Username      : {name}")
                 print(Fore.LIGHTYELLOW_EX+f"DisplayName   : {displayName}")
@@ -315,11 +342,11 @@ def Get_User_Information():
                 print(Fore.LIGHTYELLOW_EX+f"Friends       : {Friends}")
                 print(Fore.LIGHTYELLOW_EX+f"canView       : {can_view}")
                 User_Status()
-                print(Fore.LIGHTYELLOW_EX+f"Playing       : {playing_location}")
-                print(Fore.LIGHTYELLOW_EX+f"Placeid       : {place_id}")
+                PlayingCheck()
+                PlaceID_Check()
                 print(Fore.LIGHTYELLOW_EX+f"LastOnline    : {User_Last_Online}")
                 print(Fore.LIGHTYELLOW_EX+f"Created       : {created}")
-                print(Fore.LIGHTYELLOW_EX+f"Description   : {description}")
+                Description()
                 print("")
                 #=================================================================#
             else:
