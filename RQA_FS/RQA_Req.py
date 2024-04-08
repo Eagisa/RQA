@@ -87,7 +87,6 @@ def Install_Cookie():
             os.system("cls")
             print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That Cookies was invalied!\n")
             playsound(Error_sound)
-            PTC()
             time.sleep(1.3)
             os.system("cls")
             Install_Cookie()
