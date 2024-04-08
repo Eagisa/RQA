@@ -3,12 +3,21 @@ from colorama import Fore, Back, Style
 colorama.init(autoreset=True)
 import os
 import importlib.util
+from playsound import playsound
 
 # RQA COnfiguration
 #======================#
-RQA_version = "1.6.1.1"
-RQA_RD = "04/07/2024"
+RQA_version = "1.8.2.0"
+RQA_RD = "04/08/2024"
 #======================#
+
+#Sound effects for RQA
+#================================================================#
+# Get the path to the LocalAppData folder
+localappdata_path = os.environ.get('LOCALAPPDATA')
+# Construct the path to the file within the RQA folder
+Error_sound = os.path.join(localappdata_path, 'RQA', 'Error.mp3')
+#================================================================#
 
 
 local_appdata = os.getenv('LOCALAPPDATA')
@@ -49,7 +58,7 @@ def StartRQA():
         print(Fore.LIGHTBLACK_EX+" |------------------------------|")
         print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(1) -> Get User Information",Fore.LIGHTBLACK_EX+" |")
         print(Fore.LIGHTBLACK_EX+" |------------------------------|")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(2) -> Coming soon...",Fore.LIGHTBLACK_EX+"       |")
+        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(2) -> Group Features",Fore.LIGHTBLACK_EX+"       |")
         print(Fore.LIGHTBLACK_EX+" |------------------------------|")
         print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(3) -> Coming soon...",Fore.LIGHTBLACK_EX+"       |")
         print(Fore.LIGHTBLACK_EX+"<+>----------------------------<+>")
@@ -76,9 +85,11 @@ def StartRQA():
 
             elif req_numer == '2':
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Not-available\n")
+                playsound(Error_sound)
 
             elif req_numer == '3':
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Not-available\n")
+                playsound(Error_sound)
 
             elif req_numer == 'clear':
                 os.system("cls")
@@ -86,5 +97,6 @@ def StartRQA():
 
             else:
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That was invailed!\n")
+                playsound(Error_sound)
 
     main()

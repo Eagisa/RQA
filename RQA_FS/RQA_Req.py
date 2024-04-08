@@ -40,6 +40,15 @@ def Install_Cookie():
     print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Enter the valid cookie\n")
     cookie = input(Fore.LIGHTYELLOW_EX+"> ")
 
+    if cookie.lower() == '`':
+        os.system("cls")
+        local_appdata = os.getenv('LOCALAPPDATA')
+        pyc_file_path = os.path.join(local_appdata, 'RQA', 'RQAM.py')
+        spec = importlib.util.spec_from_file_location("RQAM", pyc_file_path)
+        RQAM = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(RQAM)
+        RQAM.StartRQA()
+
     # Session setup
     session = requests.Session()
     session.cookies[".ROBLOSECURITY"] = cookie
@@ -76,8 +85,9 @@ def Install_Cookie():
                 return False
         else:
             os.system("cls")
-            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your Cookies are invalied!\n")
+            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That Cookies was invalied!\n")
             playsound(Error_sound)
+            PTC()
             time.sleep(1.3)
             os.system("cls")
             Install_Cookie()
