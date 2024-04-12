@@ -406,6 +406,7 @@ def Group_Join_Request_Notifier():
             # Check if 'groupId' key exists in the config file
             if 'groupId' in config_data:
                 group_id = config_data['groupId']
+
             else:
                 os.system("cls")
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"You have not setup Group ID\n")
@@ -572,7 +573,6 @@ def Start_Group_Setup():
             try:
                 num = int(input(prompt))  # Convert input to integer
                 os.system("cls")
-                GroupFeatures()
                 return num
             except ValueError:
                 os.system("cls")
@@ -581,6 +581,7 @@ def Start_Group_Setup():
     print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"Please enter a valid group ID:\n")
     enter_group_id = get_numeric_input(Fore.LIGHTYELLOW_EX+"> ")
     Group_ID_Setup('groupId', enter_group_id)
+    GroupFeatures()
 #======================================================================#
 
 # Group Features, Options
