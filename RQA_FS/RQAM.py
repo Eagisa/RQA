@@ -7,7 +7,7 @@ from playsound import playsound
 
 # RQA COnfiguration
 #======================#
-RQA_version = "2.2.6.4"
+RQA_version = "2.2.6.9"
 RQA_RD = "04/12/2024"
 #======================#
 
@@ -28,7 +28,7 @@ spec.loader.exec_module(RQA_Req)
 
 def StartRQA():
     def title():
-        print("\n "+Fore.BLACK+Back.LIGHTBLUE_EX + f" RoQuickAcess v{RQA_version} "," ",""+Fore.BLACK+Style.NORMAL+Back.LIGHTGREEN_EX + " UPDATE ",":",Fore.LIGHTYELLOW_EX+"RQA is still in-BETA, more updates will come soon!")
+        print("\n "+Fore.BLACK+Back.LIGHTBLUE_EX + f" RoQuickAcess v{RQA_version} "," ",""+Fore.BLACK+Style.NORMAL+Back.LIGHTGREEN_EX + " UPDATE ",Fore.LIGHTYELLOW_EX+"> New UI Update, Group Feature is still in-BETA")
         print("\n")
         print("",Back.LIGHTRED_EX+Fore.BLACK + " How to use ? ",">",Fore.LIGHTYELLOW_EX + "Choose an number to request")
         print('\n')
