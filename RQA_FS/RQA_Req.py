@@ -10,6 +10,7 @@ from datetime import datetime
 import msvcrt
 import time
 from playsound import playsound
+from winotify import Notification
 
 def PTC():
     msvcrt.getch()
@@ -23,23 +24,26 @@ Error_sound = os.path.join(localappdata_path, 'RQA', 'Error.mp3')
 Res_sound = os.path.join(localappdata_path, 'RQA', 'Res.mp3')
 #================================================================#
 
-#Install new valid cookies
-#=================================================================================================================================================#
+# Cookie instaler (Requires)
+#================================================================================================================================================#
 def Install_Cookie():
     # Get the LocalAppData directory
     local_app_data = os.environ.get('LOCALAPPDATA')
     if not local_app_data:
-        print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Error: LOCALAPPDATA environment variable not set.\n")
+        print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Error: LOCALAPPDATA environment variable not set.\n")
         playsound(Error_sound)
         PTC()
         return False
+    
     config_dir = os.path.join(local_app_data, 'RQA')
     config_file_path = os.path.join(config_dir, 'Config.json')
+    
     if not os.path.exists(config_dir):
         os.makedirs(config_dir)
     os.system("cls")
-    print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Enter the valid cookie\n")
-    cookie = input(Fore.LIGHTYELLOW_EX+"> ")
+    
+    print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Enter the valid cookie\n")
+    cookie = input(Fore.LIGHTYELLOW_EX + "> ")
 
     if cookie.lower() == '`':
         os.system("cls")
@@ -54,25 +58,38 @@ def Install_Cookie():
     session = requests.Session()
     session.cookies[".ROBLOSECURITY"] = cookie
     req = session.post(url="https://auth.roblox.com/")
+    
     if "X-CSRF-Token" in req.headers: 
         csrf_token = req.headers["X-CSRF-Token"]
         session.headers["X-CSRF-Token"] = csrf_token
     
     config_data = {"cookie": cookie}
+    
     try:
         os.system("cls")
-        print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Please wait, Verifying Cookies...\n")
+        print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Please wait, Verifying Cookies...\n")
         getuser = session.get("https://users.roblox.com/v1/users/authenticated")
+        
         if getuser.status_code == 200:
             getuser2 = getuser.json()
             getuser4 = getuser2.get('name')
             os.system("cls")
-            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+f"> Congrats, Your Cookies are Validated!\n")
+            print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + f"> Congrats, Your Cookies are Validated!\n")
             playsound(Res_sound)
             time.sleep(1.3)
+            
             try:
+                # Read existing config data
+                with open(config_file_path, 'r') as config_file:
+                    existing_config_data = json.load(config_file)
+                
+                # Update existing config data with new key-value pair
+                existing_config_data.update(config_data)
+                
+                # Write updated config data back to file
                 with open(config_file_path, 'w') as config_file:
-                    json.dump(config_data, config_file, indent=4)
+                    json.dump(existing_config_data, config_file, indent=4)
+                
                 local_appdata = os.getenv('LOCALAPPDATA')
                 pyc_file_path = os.path.join(local_appdata, 'RQA', 'RQAM.py')
                 spec = importlib.util.spec_from_file_location("RQAM", pyc_file_path)
@@ -83,23 +100,23 @@ def Install_Cookie():
                 return True
             except Exception as e:
                 os.system("cls")
-                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Error saving Config.json file:", e)
+                print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> Error saving Config.json file:", e)
                 return False
         else:
             os.system("cls")
-            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That Cookies was invalied!\n")
+            print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + "> That Cookies was invalied!\n")
             playsound(Error_sound)
             time.sleep(1.3)
             os.system("cls")
             Install_Cookie()
     except Exception as e:
         os.system("cls")
-        print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+f"> Error couldn't authenticate {e}")
+        print("\n", Fore.BLACK + Back.LIGHTGREEN_EX + " R.Q.A ", Fore.LIGHTYELLOW_EX + f"> Error couldn't authenticate {e}")
         playsound(Error_sound)
         time.sleep(1.3)
         os.system("cls")
         Install_Cookie()
-#=================================================================================================================================================#
+#================================================================================================================================================#
 
 #loads Config.json file
 #================================================================================================================================#
@@ -353,3 +370,252 @@ def Get_User_Information():
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> User doesn't exist.\n")
                 playsound(Error_sound)
 #===================================================================================================================================================#
+
+# Group Join Request notifier, 
+#=========================================================================================================================#
+def Group_Join_Request_Notifier():
+    # Authentication into Roblox account
+    # Set User-Agent header
+    user_agent = "Mozilla/4.0 (compatible; MSIE 6.0; X11; Linux i686; en) Opera 9.27"
+    session.headers["User-Agent"] = user_agent
+
+    # Store already seen requester IDs to avoid duplicate notifications
+    seen_requesters = set()
+
+    #Loads Config.json "groupId"
+    #==================================================================================#
+    # Get the path to the local app data folder
+    local_app_data = os.environ.get('LOCALAPPDATA')
+    if local_app_data is None:
+        print("Error: LOCALAPPDATA environment variable not found.")
+
+    # Construct the path to the config.json file
+    config_file_path = os.path.join(local_app_data, 'RQA', 'config.json')
+
+    # Check if the config file exists
+    if not os.path.exists(config_file_path):
+        os.system("cls")
+        print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"(RQA_Req) Error: config.json file not found.\n")
+        PTC()
+        exit()
+
+    # Load the config file
+    with open(config_file_path, 'r') as config_file:
+        try:
+            config_data = json.load(config_file)
+            # Check if 'groupId' key exists in the config file
+            if 'groupId' in config_data:
+                group_id = config_data['groupId']
+            else:
+                os.system("cls")
+                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"You have not setup Group ID\n")
+                time.sleep(1.3)
+                os.system("cls")
+                Start_Group_Setup()
+        except json.JSONDecodeError:
+            os.system("cls")
+            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"Unable to parse config.json file\n")
+            PTC()
+            exit()
+    #==================================================================================#
+
+    while True:
+        try:
+            # Make GET request to the provided API endpoint
+            api_url = f"https://groups.roblox.com/v1/groups/{group_id}/join-requests?limit=100&sortOrder=Asc"
+            response = session.get(url=api_url)
+            
+            # Check response status
+            if response.status_code == 200:
+                data = response.json()["data"]
+                
+                # Check if there are any join requests
+                if data:
+                    new_requesters = []
+
+                    # Loop through each requester
+                    for item in data:
+                        requester_id = item["requester"]["userId"]
+                        requester_username = item["requester"]["username"]
+                        if requester_id not in seen_requesters:
+                            new_requesters.append({"id": requester_id, "username": requester_username})
+                            seen_requesters.add(requester_id)
+                    
+                    # Notify about new requesters
+                    if new_requesters:
+                        for requester in new_requesters:
+                            print(f"New join request from user '{requester['username']}' (ID: {requester['id']})")
+                            api_url = "https://thumbnails.roblox.com/v1/users/avatar-headshot"
+                            # Define the parameters for the API request
+                            params = {
+                                "userIds": {requester['id']},
+                                "size": "720x720",
+                                "format": "Png",
+                                "isCircular": "false"
+                            }
+
+                            # Send a GET request to the API
+                            response = requests.get(api_url, params=params)
+
+                            # Check if the request was successful
+                            if response.status_code == 200:
+                                # Extract the imageUrl from the API response
+                                data = response.json()
+                                imageUrl = data["data"][0]["imageUrl"]
+                                
+                                # Download the image
+                                image_response = requests.get(imageUrl, stream=True)
+                                if image_response.status_code == 200:
+                                    # Define the path to the LocalAppData folder
+                                    local_appdata_path = os.getenv('LOCALAPPDATA')
+                                    # Define the path to the RQA folder within LocalAppData
+                                    rqa_folder_path = os.path.join(local_appdata_path, 'RQA')
+                                    # Define the path to the Data folder within RQA
+                                    data_folder_path = os.path.join(rqa_folder_path, 'Data')
+                                    
+                                    # Create the RQA folder if it doesn't exist
+                                    if not os.path.exists(rqa_folder_path):
+                                        os.makedirs(rqa_folder_path)
+                                    
+                                    # Create the Data folder if it doesn't exist
+                                    if not os.path.exists(data_folder_path):
+                                        os.makedirs(data_folder_path)
+                                    
+                                    # Save the image to the Data folder
+                                    image_path = os.path.join(data_folder_path, 'Profile.png')
+                                    with open(image_path, 'wb') as file:
+                                        image_response.raw.decode_content = True
+                                        for chunk in image_response:
+                                            file.write(chunk)
+                                else:
+                                    os.system("cls")
+                                    image_eror = image_response.status_code
+                                    print("Failed to load image. Status code:")
+                                    PTC()
+                                    exit()
+                            else:
+                                os.system("cls")
+                                res_eror = response.status_code
+                                print(f"Failed to fetch image URL from API. Status code: {res_eror}")
+                                PTC()
+                                exit()
+                        
+                        url = f"https://groups.roblox.com/v2/groups?groupIds={group_id}"
+                        # Sending GET request to the API
+                        response = requests.get(url)
+                        # Parsing JSON response
+                        data = response.json()
+                        # Extracting name from the response
+                        group_name = data["data"][0]["name"]
+
+                        local_appdata_path = os.getenv('LOCALAPPDATA')
+                        image_path = os.path.join(local_appdata_path, 'RQA', 'Data', 'Profile.png')
+
+                        # Display notification with the downloaded image as the icon
+                        toast = Notification(app_id="RQA Notifier",
+                                            title=f"{group_name} New Join Request ",
+                                            msg=f"{requester['username']}'s join request is pending",
+                                            icon=image_path)
+                        toast.show()
+
+                else:
+                    # if there is no request it will pass and keep repeating...
+                    pass
+
+            else:
+                print(f"API Status code: {response.status_code}\n")
+                #print("Response:", response.text)
+                print("You have insufficient permissions for this request.\n")
+                print("Insufficient permissions to complete the request.\n")
+                print("This account has no permission to manage the group.\n")
+                PTC()
+
+        except Exception as e:
+            print(f"[Error] {e}\n")
+            print("[Info] Your cookie is invalid")
+            print("[Info] Please restart the program with a valid cookie")
+        # Add a delay before the next iteration
+        time.sleep(1)  # Adjust the delay as needed (in seconds)
+#=========================================================================================================================#
+
+# Setup Group ID
+#======================================================================#
+def Start_Group_Setup():
+    def Group_ID_Setup(key, value):
+        # Get the path to the LocalAppData directory
+        local_app_data = os.getenv('LOCALAPPDATA')
+        
+        # Create the folder path if it doesn't exist
+        folder_path = os.path.join(local_app_data, 'RQA')
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+
+        # Define the full path to the config file
+        config_file_path = os.path.join(folder_path, 'config.json')
+
+        # Load existing config data if the file exists
+        if os.path.exists(config_file_path):
+            with open(config_file_path, 'r') as file:
+                config_data = json.load(file)
+        else:
+            config_data = {}
+
+        # Update the config data with the new key-value pair
+        config_data[key] = value
+
+        # Write the updated config data back to the file
+        with open(config_file_path, 'w') as file:
+            json.dump(config_data, file, indent=4)
+
+    def get_numeric_input(prompt):
+        while True:
+            try:
+                num = int(input(prompt))  # Convert input to integer
+                os.system("cls")
+                GroupFeatures()
+                return num
+            except ValueError:
+                os.system("cls")
+                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"Please enter a valid group ID:\n")
+
+    print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"Please enter a valid group ID:\n")
+    enter_group_id = get_numeric_input(Fore.LIGHTYELLOW_EX+"> ")
+    Group_ID_Setup('groupId', enter_group_id)
+#======================================================================#
+
+# Group Features, Options
+#========================================================================================================================#
+def GroupFeatures():
+    print(Fore.LIGHTYELLOW_EX+"      Group Features \n"
+          "<+>---------------------<+>\n"
+          " | (1) Setup Group ID    |\n"
+          " |-----------------------|\n"
+          " | (2) Coming soon...    |\n"
+          "<+>---------------------<+>\n")
+    
+    while True:
+        entry = input(Fore.LIGHTYELLOW_EX+"> ")
+
+        if entry == "1":
+            os.system("cls")
+            Start_Group_Setup()
+        
+        elif entry == "2":
+            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Coming soon...\n")
+        
+        elif entry == "clear":
+            os.system("cls")
+            GroupFeatures()
+
+        elif entry == '`':
+            os.system("cls")
+            local_appdata = os.getenv('LOCALAPPDATA')
+            pyc_file_path = os.path.join(local_appdata, 'RQA', 'RQAM.py')
+            spec = importlib.util.spec_from_file_location("RQAM", pyc_file_path)
+            RQAM = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(RQAM)
+            RQAM.StartRQA()
+        else:
+            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That was invailed!\n")
+            playsound(Error_sound)
+#========================================================================================================================#

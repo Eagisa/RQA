@@ -7,8 +7,8 @@ from playsound import playsound
 
 # RQA COnfiguration
 #======================#
-RQA_version = "1.9.7.0"
-RQA_RD = "04/09/2024"
+RQA_version = "2.1.2.0"
+RQA_RD = "04/12/2024"
 #======================#
 
 #Sound effects for RQA
@@ -84,8 +84,8 @@ def StartRQA():
                 RQA_Req.Get_User_Information()
 
             elif req_numer == '2':
-                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Not-available\n")
-                playsound(Error_sound)
+                os.system("cls")
+                RQA_Req.GroupFeatures()
 
             elif req_numer == '3':
                 print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Not-available\n")
