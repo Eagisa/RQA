@@ -7,7 +7,7 @@ from playsound import playsound
 
 # RQA COnfiguration
 #======================#
-RQA_version = "2.1.2.0"
+RQA_version = "2.2.6.4"
 RQA_RD = "04/12/2024"
 #======================#
 
@@ -28,13 +28,9 @@ spec.loader.exec_module(RQA_Req)
 
 def StartRQA():
     def title():
-        print(Fore.LIGHTBLACK_EX+"<+>-------------------------<+>",           " ",Fore.LIGHTBLACK_EX+"<+>---------------------------------------------------------------<+>")
-        print("    "+Fore.BLACK+Back.LIGHTBLUE_EX +   f" RoQuickAcess v{RQA_version} "," ","        "+Fore.BLACK+Style.NORMAL+Back.LIGHTGREEN_EX + " UPDATE ",":",Fore.LIGHTYELLOW_EX+"RQA is still in-BETA, more updates will come soon!")
-        print(Fore.LIGHTBLACK_EX+"<+>-------------------------<+>",                         " ",Fore.LIGHTBLACK_EX+"<+>---------------------------------------------------------------<+>")
+        print("\n "+Fore.BLACK+Back.LIGHTBLUE_EX + f" RoQuickAcess v{RQA_version} "," ",""+Fore.BLACK+Style.NORMAL+Back.LIGHTGREEN_EX + " UPDATE ",":",Fore.LIGHTYELLOW_EX+"RQA is still in-BETA, more updates will come soon!")
         print("\n")
-        print(Fore.LIGHTBLACK_EX+"<+>----------------------------------------------<+>")
-        print("   ",Back.LIGHTRED_EX+Fore.BLACK + " How to use ? ",">",Fore.LIGHTYELLOW_EX + "Choose an number to request")
-        print(Fore.LIGHTBLACK_EX+"<+>----------------------------------------------<+>")
+        print("",Back.LIGHTRED_EX+Fore.BLACK + " How to use ? ",">",Fore.LIGHTYELLOW_EX + "Choose an number to request")
         print('\n')
 
     def Show_Account_Authenticated():
@@ -43,26 +39,18 @@ def StartRQA():
             getuser = session.get("https://users.roblox.com/v1/users/authenticated")
             getuser2 = getuser.json()
             getuser4 = getuser2['name']
-            print(Fore.LIGHTBLACK_EX+"<+>-------------------------------------------------<+>")
-            print("   ",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ",Fore.LIGHTYELLOW_EX+f"> Authentication Logged in as {getuser4}")
-            print(Fore.LIGHTBLACK_EX+"<+>-------------------------------------------------<+>\n")
+            print("",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ",Fore.LIGHTYELLOW_EX+f"> Authentication Logged in as {getuser4}")
+            print('\n')
         except Exception as e:
-            print(Fore.LIGHTBLACK_EX+"<+>-----------------------------------------------------------<+>")
-            print("   ",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your cookies are invalid")
-            print(Fore.LIGHTBLACK_EX+"<+>-----------------------------------------------------------<+>\n")
+            print("",Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Your cookies are invalid")
+            print('\n')
             
     def menu():
-        print("             ",Back.LIGHTWHITE_EX+Fore.BLACK+" Menu ",Fore.BLACK+"Ro")
-        print(Fore.LIGHTBLACK_EX+"<+>----------------------------<+>")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(0) -> Install Cookies",Fore.LIGHTBLACK_EX+"      |")
-        print(Fore.LIGHTBLACK_EX+" |------------------------------|")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(1) -> Get User Information",Fore.LIGHTBLACK_EX+" |")
-        print(Fore.LIGHTBLACK_EX+" |------------------------------|")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(2) -> Group Features",Fore.LIGHTBLACK_EX+"       |")
-        print(Fore.LIGHTBLACK_EX+" |------------------------------|")
-        print(Fore.LIGHTBLACK_EX+" |",Fore.LIGHTYELLOW_EX+"(3) -> Coming soon...",Fore.LIGHTBLACK_EX+"       |")
-        print(Fore.LIGHTBLACK_EX+"<+>----------------------------<+>")
-        print("\n")
+        print("          ",Back.LIGHTYELLOW_EX+Fore.BLACK+" Menu ",Fore.BLACK+"Ro\n")
+        print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 0 ",Fore.LIGHTYELLOW_EX+"> Install Cookies\n")
+        print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 1 ",Fore.LIGHTYELLOW_EX+"> Get User Information\n")
+        print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 2 ",Fore.LIGHTYELLOW_EX+"> Group Features\n")
+        print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 3 ",Fore.LIGHTYELLOW_EX+"> Coming soon...\n")
 
     def main():
         #Main theme of the RoQuickAccess App
