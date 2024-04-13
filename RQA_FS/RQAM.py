@@ -7,7 +7,7 @@ from playsound import playsound
 
 # RQA COnfiguration
 #======================#
-RQA_version = "2.2.6.9"
+RQA_version = "2.5.0.0"
 RQA_RD = "04/12/2024"
 #======================#
 
@@ -84,7 +84,7 @@ def StartRQA():
                 main()
 
             else:
-                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That was invailed!\n")
+                print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That was invalied!\n")
                 playsound(Error_sound)
 
     main()

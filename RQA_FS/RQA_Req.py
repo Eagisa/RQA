@@ -11,6 +11,10 @@ import msvcrt
 import time
 from playsound import playsound
 from winotify import Notification
+import psutil
+import subprocess
+import winsound
+
 
 def PTC():
     msvcrt.getch()
@@ -518,7 +522,7 @@ def Group_Join_Request_Notifier():
                                             msg=f"{requester['username']}'s join request is pending",
                                             icon=image_path)
                         toast.show()
-
+                        winsound.PlaySound("SystemNotification", winsound.SND_ALIAS)
                 else:
                     # if there is no request it will pass and keep repeating...
                     pass
@@ -538,6 +542,41 @@ def Group_Join_Request_Notifier():
         # Add a delay before the next iteration
         time.sleep(1)  # Adjust the delay as needed (in seconds)
 #=========================================================================================================================#
+
+# Group Features, Options
+#========================================================================================================================#
+def GroupFeatures():
+    print(Fore.LIGHTYELLOW_EX+"           Group Features \n")
+    print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 1 ",Fore.LIGHTYELLOW_EX+"> Setup Group ID (Required)\n")
+    print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 2 ",Fore.LIGHTYELLOW_EX+"> Group Settings\n")
+    
+    while True:
+        entry = input(Fore.LIGHTYELLOW_EX+"> ")
+
+        if entry == "1":
+            os.system("cls")
+            Start_Group_Setup()
+        
+        elif entry == "2":
+            os.system("cls")
+            Group_Notifier_Settings()
+        
+        elif entry == "clear":
+            os.system("cls")
+            GroupFeatures()
+
+        elif entry == '`':
+            os.system("cls")
+            local_appdata = os.getenv('LOCALAPPDATA')
+            pyc_file_path = os.path.join(local_appdata, 'RQA', 'RQAM.py')
+            spec = importlib.util.spec_from_file_location("RQAM", pyc_file_path)
+            RQAM = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(RQAM)
+            RQAM.StartRQA()
+        else:
+            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That was invailed!\n")
+            playsound(Error_sound)
+#========================================================================================================================#
 
 # Setup Group ID
 #======================================================================#
@@ -584,39 +623,71 @@ def Start_Group_Setup():
     GroupFeatures()
 #======================================================================#
 
-# Group Features, Options
-#========================================================================================================================#
-def GroupFeatures():
-    print(Fore.LIGHTYELLOW_EX+"      Group Features \n"
-          "<+>---------------------<+>\n"
-          " | (1) Setup Group ID    |\n"
-          " |-----------------------|\n"
-          " | (2) Coming soon...    |\n"
-          "<+>---------------------<+>\n")
-    
+# Group Notifier Settings
+#==================================================================================================================================================================#
+def Group_Notifier_Settings():
+    print("\n",Fore.LIGHTYELLOW_EX+"          Group Settings \n")
+
+    def find_process(exe_name):
+        for proc in psutil.process_iter(['pid', 'name']):
+            if proc.info['name'] == exe_name:
+                return True
+        return False
+
+    exe_name = "RQA_Notifier.exe"  # Change this to the name of the .exe file you're looking for
+    is_running = find_process(exe_name)
+
+    if is_running == True:
+        print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 1 ",Fore.LIGHTYELLOW_EX+f"> Notify New Join Request",Fore.BLACK+Back.LIGHTGREEN_EX+" Enabled ",Fore.BLACK+"Ro\n")
+    else:
+        print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 1 ",Fore.LIGHTYELLOW_EX+f"> Notify New Join Request",Fore.BLACK+Back.LIGHTRED_EX+" Disabled ",Fore.BLACK+"Ro\n")
+
     while True:
         entry = input(Fore.LIGHTYELLOW_EX+"> ")
 
-        if entry == "1":
+        if entry == "clear":
             os.system("cls")
-            Start_Group_Setup()
+            Group_Notifier_Settings()
+
+        elif entry == "disable=1" or entry == "d=1":
+            def find_and_terminate_processes(exe_name):
+                terminated = False
+                while True:
+                    found = False
+                    for proc in psutil.process_iter(['pid', 'name']):
+                        if proc.info['name'] == exe_name:
+                            proc.terminate()
+                            found = True
+                    if not found:
+                        break
+                    terminated = True
+                return terminated
+            
+            exe_name = "RQA_Notifier.exe"  # Change this to the name of the .exe file you're looking to terminate
+            # Use this "terminated" to verify there is no problem
+            #===================================================#
+            terminated = find_and_terminate_processes(exe_name) 
+            #===================================================#
+            
+            os.system("cls")
+            Group_Notifier_Settings()
         
-        elif entry == "2":
-            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> Coming soon...\n")
+        elif entry == "enable=1" or entry == "e=1":
+            localappdata_path = os.environ.get('LOCALAPPDATA')
+            # Construct the path to the file within the RQA folder
+            RQA_Notifier_Launcher = os.path.join(localappdata_path, 'RQA', 'RQA_Notifier.exe')
+            # Execute the .exe file without capturing output
+            subprocess.Popen(RQA_Notifier_Launcher)
+
+            os.system("cls")  # This line might not be necessary if you want to keep the console output visible
+
+            Group_Notifier_Settings()
         
-        elif entry == "clear":
+        elif entry == "`":
             os.system("cls")
             GroupFeatures()
-
-        elif entry == '`':
-            os.system("cls")
-            local_appdata = os.getenv('LOCALAPPDATA')
-            pyc_file_path = os.path.join(local_appdata, 'RQA', 'RQAM.py')
-            spec = importlib.util.spec_from_file_location("RQAM", pyc_file_path)
-            RQAM = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(RQAM)
-            RQAM.StartRQA()
+        
         else:
-            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That was invailed!\n")
+            print("\n", Fore.BLACK+Back.LIGHTGREEN_EX+" R.Q.A ", Fore.LIGHTYELLOW_EX+"> That was invalied!\n")
             playsound(Error_sound)
-#========================================================================================================================#
+#==================================================================================================================================================================#
