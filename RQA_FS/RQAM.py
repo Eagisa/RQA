@@ -7,7 +7,7 @@ from playsound import playsound
 
 # RQA COnfiguration
 #======================#
-RQA_version = "2.5.0.0"
+RQA_version = "2.5.0.5"
 RQA_RD = "04/12/2024"
 #======================#
 
@@ -49,7 +49,7 @@ def StartRQA():
         print("          ",Back.LIGHTYELLOW_EX+Fore.BLACK+" Menu ",Fore.BLACK+"Ro\n")
         print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 0 ",Fore.LIGHTYELLOW_EX+"> Install Cookies\n")
         print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 1 ",Fore.LIGHTYELLOW_EX+"> Get User Information\n")
-        print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 2 ",Fore.LIGHTYELLOW_EX+"> Group Features\n")
+        print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 2 ",Fore.LIGHTYELLOW_EX+"> Group Features (BETA)\n")
         print("",Back.LIGHTYELLOW_EX+Fore.BLACK+" 3 ",Fore.LIGHTYELLOW_EX+"> Coming soon...\n")
 
     def main():
