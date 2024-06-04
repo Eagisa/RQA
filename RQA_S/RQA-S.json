@@ -1,8 +1,8 @@
 {
     "RQA-C": {
       "Class": "RQA-Client",
-      "Version": "2.5.0.5",
-      "Modified_Date": "04/13/2024 10:20 PM"
+      "Version": "2.6.0.0",
+      "Modified_Date": "06/04/2024 6:50 PM"
     },
   
     "RQA-FS": {
@@ -11,6 +11,7 @@
       "Config": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/Config.json",
       "Error": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/Error.mp3",
       "Res": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/Res.mp3",
-      "RQA_Notifier": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQA_Notifier.exe"
+      "RQA_Notifier": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQA_Notifier.exe",
+      "RQA_Launcher": "https://raw.githubusercontent.com/Eagisa/RQA/main/RQA_FS/RQA_Launcher.exe"
     }
 }
