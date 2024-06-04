@@ -7,8 +7,8 @@ from playsound import playsound
 
 # RQA COnfiguration
 #======================#
-RQA_version = "2.5.0.5"
-RQA_RD = "04/12/2024"
+RQA_version = "2.6.0.0"
+RQA_RD = "06/04/2024"
 #======================#
 
 #Sound effects for RQA
